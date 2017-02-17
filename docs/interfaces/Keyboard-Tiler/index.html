@@ -1,0 +1,280 @@
+<!DOCTYPE html><html class="interfaces_entry"><head><title>Keyboard Tiler « Userbound</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/assets/all.css?build=1487385284">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script src="/assets/all.js?build=1487385284"></script>
+</head>
+  <body>
+    
+      <div class="wrapper">
+        <nav class="fade-in">
+  <div class="inner">
+    <a class="guy" href="/" title="A Self Portrait of Miles Alan!">
+      <span class="head"></span>
+      <span class="body"></span>
+      
+    </a>
+    <div class="links">
+      <div class="equal-span">
+        
+          
+          
+
+          
+          
+          
+
+          
+          <a class=" svg-icon" href="/blog" title="Blog">
+  <span class="symbol">
+    <svg class="icon-three-bars">
+      <use xlink:href="/assets/images/icons.svg#icon-three-bars"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+          
+          
+
+          
+          
+          
+            
+          
+
+          
+          <a class="active entry svg-icon" href="/interfaces" title="Interfaces">
+  <span class="symbol">
+    <svg class="icon-crop">
+      <use xlink:href="/assets/images/icons.svg#icon-crop"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+          
+          
+
+          
+          
+          
+
+          
+          <a class=" svg-icon" href="/works" title="Works">
+  <span class="symbol">
+    <svg class="icon-paintcan">
+      <use xlink:href="/assets/images/icons.svg#icon-paintcan"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+          
+          
+
+          
+          
+          
+
+          
+          <a class=" svg-icon" href="/about" title="About">
+  <span class="symbol">
+    <svg class="icon-person">
+      <use xlink:href="/assets/images/icons.svg#icon-person"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+        <main class="fade-down">
+          
+<header>
+  <h1>
+    Keyboard Tiler
+    
+      
+      <span class="status production"></span>
+      
+    
+  </h1>
+  
+    <span class="description">Window Tiling Script</span>
+  
+  
+    <div class="links">
+      
+      <div class="link">
+
+        
+        <a href="https://github.com/mil/keyboard-tiler" target="_blank">Source</a>
+        
+
+      </div>
+      
+      <div class="link">
+
+        
+        <a href="https://github.com/ShadowKyogre/keyboard-tiler" target="_blank">Python Port</a>
+        
+
+      </div>
+      
+    </div>
+  
+  
+</header>
+
+<section class="content">
+  
+
+  <p>Keyboard Tiler is a simple script which given 2 keys on your keyboard, maps a window to the screen using the keyboard grid as referent.  </p>
+<p>On a keyboard, the keys from <strong>1</strong> down to <strong>Z</strong> over to <strong>/</strong>, and up to <strong>0</strong> form a 4x10 grid. Given the 40 tiles on your keyboard, keyboard tiler maps the visual space of your screen to the grid of your keyboard.</p>
+<div class="interface-hero block"><table id="keyboard">
+    <tbody><tr> <td class="hit act">1</td> <td class="hit">2</td> <td class="hit">3</td> <td class="hit">4</td> <td class="hit">5</td> <td>6</td> <td>7</td> <td>8</td> <td>9</td> <td>0</td> </tr>
+
+    <tr> <td class="hit">Q</td> <td class="hit">W</td> <td class="hit">E</td> <td class="hit">R</td> <td class="hit">T</td> <td>Y</td> <td>U</td> <td>I</td> <td>O</td> <td>P</td> </tr>
+
+    <tr> <td class="hit">A</td> <td class="hit">S</td> <td class="hit">D</td> <td class="hit">F</td> <td class="hit">G</td> <td>H</td> <td>J</td> <td>K</td> <td>L</td> <td>;</td> </tr>
+
+    <tr> <td class="hit">Z</td> <td class="hit">X</td> <td class="hit">C</td> <td class="hit">V</td> <td class="hit act">B</td> <td>N</td> <td>M</td> <td>&lt;</td> <td>&gt;</td> <td>/</td> </tr>
+</tbody></table></div>
+
+<p>So in the above example, hitting <strong>1 and B</strong> would place and resize a window to occupy the entire <strong>left half your screen because that's the left half of your keyboard</strong>. This works for any two keys.  My intention was to create an obvious and intuitive mental model for keyboard-driven window management.</p>
+<p>I scripted around <code>xdotool</code> so I could focus on the logic of processing the two points and positioning the window on the screen rather than building out a full window manager. The <a href="http://github.com/mil/keyboard-tiler/blob/master/keyboard-tiler.rb" target="_blank">entire script</a> works to calculate the variables used, ultimatly pushing to xdotool as:</p>
+<pre data-language="" class="ruby">%x[xdotool getactivewindow windowmove --sync #{startX} #{decorationsHeight + startY}]
+%x[xdotool getactivewindow windowsize --sync #{newWidth} #{newHeight - (decorationsHeight * 2)}]
+</pre>
+
+<p>Providing keybindings is another task separate from the logic of my key processing script. For the keybindings my first thought was to use <a href="http://code.google.com/p/xchainkeys" target="_blank">xchainkeys</a>. This way I could have emacs style key chording for pressing two keys in positioning.  To generate the keybindings for xchainkeys, I created the <a href="https://github.com/mil/keyboard-tiler/blob/master/utils/generate-xchains.rb" target="_blank">logic to generate all permutations</a> for any two keys on the grid being pressed:</p>
+<pre data-language="" class="ruby">$tiles = [
+    [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ],
+    [ 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' ],
+    [ 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';' ],
+    [ 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/' ]
+]
+
+def crawl(s)
+    $tiles.each_with_index do |row, column|
+        row.each_with_index do |cell, count|    
+            # This is 1 Permutation! 
+            # This will be hit 1560 times!
+        end
+    end
+end
+
+$tiles.each_with_index do |row, column|
+    row.each_with_index do |cell, count|
+        crawl(cell)
+    end
+end
+</pre>
+
+<p>You can also use this script with <a href="http://tools.suckless.org/dmenu/" target="_blank">Dmenu</a> if your handy with pipes and the only disadvantage over xbindkeys is you have to hit enter after your two keys. An example of how to setup Dmenu can be found in the project's <a href="http://github.com/mil/keyboard-tiler" target="_blank">README</a>.</p>
+
+  
+
+</section>
+
+          <footer>
+  <div class="audio-track-seekers">
+    
+    <a class="previous hidden svg-icon" href="false" title="Previous track">
+  <span class="symbol">
+    <svg class="icon-arrow-left">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-left"></use>
+    </svg>
+  </span>
+</a>
+
+    
+    <a class="next hidden svg-icon" href="false" title="Next track">
+  <span class="symbol">
+    <svg class="icon-arrow-right">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-right"></use>
+    </svg>
+  </span>
+</a>
+
+  </div>
+
+
+  
+    <div class="pagination-links">
+
+
+      
+        
+        <a class=" svg-icon" href="/interfaces/Foo-Wm" title="Foo window manager">
+  <span class="symbol">
+    <svg class="icon-arrow-left">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-left"></use>
+    </svg>
+  </span>
+</a>
+
+      
+
+      
+      <a class="up svg-icon" href="/interfaces" title="Go up">
+  <span class="symbol">
+    <svg class="icon-arrow-up-1">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-up-1"></use>
+    </svg>
+  </span>
+</a>
+
+
+
+      
+        
+        <a class=" svg-icon" href="/interfaces/Piply" title="Piply">
+  <span class="symbol">
+    <svg class="icon-arrow-right">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-right"></use>
+    </svg>
+  </span>
+</a>
+
+      
+
+    </div>
+  
+
+  
+  
+  <a class="validate svg-icon" target="_blank" href="http://validator.w3.org/check?uri=http://userbound.com/interfaces/Keyboard-Tiler" title="Validate against html5 dtd">
+  <span class="symbol">
+    <svg class="icon-check-1">
+      <use xlink:href="/assets/images/icons.svg#icon-check-1"></use>
+    </svg>
+  </span>
+</a>
+
+
+
+
+
+
+</footer>
+
+        </main>
+      </div>
+    
+    <script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(101026612); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101026612ns.gif" /></p></noscript>
+
+  
+
+</body></html>

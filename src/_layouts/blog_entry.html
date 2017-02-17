@@ -1,0 +1,9 @@
+{% extends '_layouts/default.html' %}
+
+{% block main %}
+{% include "_partials/entry_header.html" %}
+  <section class='content'>
+    {{ yield|raw }}
+    {% include "_partials/footnotes.html" %}
+  </section>
+{% endblock %}

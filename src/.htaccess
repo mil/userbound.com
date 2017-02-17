@@ -1,0 +1,27 @@
+Options -Indexes +FollowSymLinks
+AddType text/plain .scad
+
+
+RewriteEngine on
+RewriteBase /
+
+# Max cache for half a day, while in dev..
+ExpiresActive On
+ExpiresDefault "active plus 12 hours" 
+Header set Cache-Control "max-age=86400, public, must-revalidate"
+
+# 404
+ErrorDocument 404 /
+
+# No traliing slashes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+
+Redirect /projects /interfaces
+Redirect /ui /interfaces
+Redirect /interfaces/userbound /
+Redirect /interfaces/mil-edit /interfaces/Mil-Edit
+Redirect /interfaces/markdown-tree /interfaces/Markdown-Tree
+Redirect /interfaces/foo-wm /interfaces/Foo-Wm

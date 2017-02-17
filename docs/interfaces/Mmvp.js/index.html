@@ -1,0 +1,320 @@
+<!DOCTYPE html><html class="interfaces_entry"><head><title>Mmvp.js « Userbound</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/assets/all.css?build=1487385284">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script src="/assets/all.js?build=1487385284"></script>
+</head>
+  <body>
+    
+      <div class="wrapper">
+        <nav class="fade-in">
+  <div class="inner">
+    <a class="guy" href="/" title="A Self Portrait of Miles Alan!">
+      <span class="head"></span>
+      <span class="body"></span>
+      
+    </a>
+    <div class="links">
+      <div class="equal-span">
+        
+          
+          
+
+          
+          
+          
+
+          
+          <a class=" svg-icon" href="/blog" title="Blog">
+  <span class="symbol">
+    <svg class="icon-three-bars">
+      <use xlink:href="/assets/images/icons.svg#icon-three-bars"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+          
+          
+
+          
+          
+          
+            
+          
+
+          
+          <a class="active entry svg-icon" href="/interfaces" title="Interfaces">
+  <span class="symbol">
+    <svg class="icon-crop">
+      <use xlink:href="/assets/images/icons.svg#icon-crop"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+          
+          
+
+          
+          
+          
+
+          
+          <a class=" svg-icon" href="/works" title="Works">
+  <span class="symbol">
+    <svg class="icon-paintcan">
+      <use xlink:href="/assets/images/icons.svg#icon-paintcan"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+          
+          
+
+          
+          
+          
+
+          
+          <a class=" svg-icon" href="/about" title="About">
+  <span class="symbol">
+    <svg class="icon-person">
+      <use xlink:href="/assets/images/icons.svg#icon-person"></use>
+    </svg>
+  </span>
+</a>
+
+
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+        <main class="fade-down">
+          
+<header>
+  <h1>
+    Mmvp.js
+    
+      
+      <span class="status production"></span>
+      
+    
+  </h1>
+  
+    <span class="description">µ-MVP Library</span>
+  
+  
+    <div class="links">
+      
+      <div class="link">
+
+        
+        <a href="http://github.com/mil/Mmvp.js" target="_blank">Source</a>
+        
+
+      </div>
+      
+    </div>
+  
+  
+</header>
+
+<section class="content">
+  
+
+  <p>Mmvp.js is a micro-MVP javascript library which allows you to bind presenter callbacks to be triggered in reaction to changes in a model.</p>
+<p>Binding<sup>1</sup> callbacks is as simple as passing a presenter callback function to <code>Mmvp</code>'s <code>set_action</code> function.  Once an action is bound, modifying the model dispatches the attached callback:</p>
+<pre data-language="" class="js">var presenter = new Mmvp();
+var model = {};
+
+presenter.set_action({
+    add: function(key, value) {
+        console.log(
+            "key '" + key + "' added with value '" + value + "'"
+        );
+    }
+});
+
+model.item_a = "hello";
+presenter.sync(model);
+// console.log: key 'item_a' added with value 'hello'</pre>
+
+
+
+<p>The above example<sup>2</sup> shows binding of the <code>add</code> action callback. In addition to the <code>add</code> callback, the following callbacks may be bound to react to model changes:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Action</th>
+<th style="text-align:left">Arguments</th>
+<th style="text-align:left">Dispatched when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>add</code></td>
+<td style="text-align:left"><code>key</code>, <code>value</code></td>
+<td style="text-align:left">An item is added to the model</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>remove</code></td>
+<td style="text-align:left"><code>key</code></td>
+<td style="text-align:left">An item is removed from the model</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>update</code></td>
+<td style="text-align:left"><code>key</code>, <code>value</code></td>
+<td style="text-align:left">An item's value was udpated</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>populate</code></td>
+<td style="text-align:left"><code>key</code>, <code>value</code></td>
+<td style="text-align:left">The model goes from being empty to populated</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>empty</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">The model goes from being populated to empty</td>
+</tr>
+</tbody>
+</table>
+<p>You can imagine how you might construct more complex views by putting to use DOM selectors and a templating engine in your action callbacks.</p>
+<hr>
+
+<p>A MVP library explication wouldn't be complete without a TodoMVC demo. So, here's an archetypal TodoMVC demo coded up<sup>3</sup> using <code>Mmvp</code>'s presenter callbacks. :</p>
+<div class="interface-demo">
+<script type="text/javascript" src="/interfaces/Mmvp.js/demo/underscore.min.js"></script>
+<script type="text/javascript" src="/interfaces/Mmvp.js/demo/Mmvp.js"></script>
+<script type="text/javascript" src="/interfaces/Mmvp.js/demo/js/todo.js"></script>
+<script type="text/javascript" src="/interfaces/Mmvp.js/demo/js/demo_page.js"></script>
+<link rel="stylesheet" href="/interfaces/Mmvp.js/demo/css/style.css">
+
+<section id="demo" class="block">
+  <nav><h3 class="view active">View</h3><h3 class="model">Model</h3></nav>
+  <section id="switcher"> 
+    <section class="view active"><br>      <div id="viewpen"></div>
+      <div id="newitem">
+        <span class="hint">»</span>
+        <input type="text" placeholder="Item Name">
+      </div>
+    </section>
+    <section class="model"><pre class="brush: js; toolbar: false;"></pre></section>
+  </section>
+</section>
+
+</div>
+
+  
+<ol class="footnotes">
+  
+  <li><span name="footnote-1"><i>Binding</i> as in specifying M-&gt;V callbacks; and not V-&gt;M callbacks. After all V-&gt;M logic is typically handled as consequent of user-interaction and thus should be specified in user-interface callbacks.</span></li>
+  
+  <li><span name="footnote-2">Feel free to pop open web inspector and run on this page! <code>Mmvp</code> is in global scope.</span></li>
+  
+  <li><span name="footnote-3">The <a href="https://github.com/mil/userbound.com-gulp/blob/master/src/interfaces/demos/Mmvp.js/demo/js/todo.js" target="_blank">demo code</a> (74 SLOC) is only slighter heavier than the <a href="https://github.com/mil/userbound.com-gulp/blob/master/src/interfaces/demos/Mmvp.js/demo/Mmvp.js" target="_blank">Mmvp library</a> itself (45 SLOC)</span></li>
+  
+</ol>
+
+
+</section>
+
+          <footer>
+  <div class="audio-track-seekers">
+    
+    <a class="previous hidden svg-icon" href="false" title="Previous track">
+  <span class="symbol">
+    <svg class="icon-arrow-left">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-left"></use>
+    </svg>
+  </span>
+</a>
+
+    
+    <a class="next hidden svg-icon" href="false" title="Next track">
+  <span class="symbol">
+    <svg class="icon-arrow-right">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-right"></use>
+    </svg>
+  </span>
+</a>
+
+  </div>
+
+
+  
+    <div class="pagination-links">
+
+
+      
+        
+        <a class=" svg-icon" href="/interfaces/Mil-Edit" title="Mil edit">
+  <span class="symbol">
+    <svg class="icon-arrow-left">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-left"></use>
+    </svg>
+  </span>
+</a>
+
+      
+
+      
+      <a class="up svg-icon" href="/interfaces" title="Go up">
+  <span class="symbol">
+    <svg class="icon-arrow-up-1">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-up-1"></use>
+    </svg>
+  </span>
+</a>
+
+
+
+      
+        
+        <a class=" svg-icon" href="/interfaces/Markdown-Tree" title="Markdown tree">
+  <span class="symbol">
+    <svg class="icon-arrow-right">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-right"></use>
+    </svg>
+  </span>
+</a>
+
+      
+
+    </div>
+  
+
+  
+  
+  <a class="validate svg-icon" target="_blank" href="http://validator.w3.org/check?uri=http://userbound.com/interfaces/Mmvp.js" title="Validate against html5 dtd">
+  <span class="symbol">
+    <svg class="icon-check-1">
+      <use xlink:href="/assets/images/icons.svg#icon-check-1"></use>
+    </svg>
+  </span>
+</a>
+
+
+
+
+
+
+</footer>
+
+        </main>
+      </div>
+    
+    <script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(101026612); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101026612ns.gif" /></p></noscript>
+
+  
+
+</body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>mil edit: a simple markdown list editor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/page.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script type="text/javascript" src="./js/zepto.min.js"></script>
+    <script type="text/javascript" src="./js/underscore.min.js"></script>
+
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/to-markdown.js"></script>
+
+    <script type="text/javascript" src="./js/mil_edit.template.js"></script>
+    <script type="text/javascript" src="./js/mil_edit.js"></script>
+    <script type="text/javascript" src="./js/start_on_load.js"></script>
+  </head>
+  <body>
+    <a id="fork-me" href="https://github.com/mil/mil-edit"><img src="images/forkme.png" alt="Fork me on GitHub"></a>
+    <div id="application">
+      <h1>mil edit</h1>
+      <hr/>
+      <div id="editor"></div>
+      <hr/>
+      <div id="footer">
+        <a onclick='mil_edit.clear()' title="Press Ctrl-X to Clear the Content">Clear Content</a>, <a title="Press Ctrl-Q to Switch the Mode" id="mode" onclick='mil_edit.mode()'>Markdown Mode</a> <a class="right" onclick='alert(mil_edit.dump_markdown())'>Export Markdown</a><br/>
+      </div>
+    </div>
+  </body>
+</html>

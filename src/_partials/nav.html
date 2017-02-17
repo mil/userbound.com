@@ -1,0 +1,38 @@
+<nav class='fade-in'>
+  <div class='inner'>
+    <a class='guy' href="/" title='A Self Portrait of Miles Alan!'>
+      <span class='head'></span>
+      <span class='body'></span>
+      {% if title == "Unoshowfcornow" %}
+      <span class='feet'></span>
+      {% endif %}
+    </a>
+    <div class='links'>
+      <div class='equal-span'>
+        {% for link in nav_links %}
+          {% set t = link.title %}
+          {% if title == "Userbound" %}
+          {% set t = "Roulette wheel" %}
+          {% endif %}
+
+          {# Sets classes #}
+          {% set class_list = "" %}
+          {% if link.active_section %}
+            {% set class_list = "active " + page_type %}
+          {% endif %}
+
+          {%
+            set icon_attrs = {
+              icon: link.symbol,
+              title: t,
+              href: link.url,
+              class_list: class_list
+            }
+          %}
+          {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</nav>

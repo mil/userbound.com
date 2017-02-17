@@ -1,0 +1,18 @@
+{% extends '_layouts/default.html' %}
+
+{% block main %}
+<header>
+  <h1>{{ title }}</h1>
+  <div class='filter-by'>
+    <button class='active'>Web</button>
+    <button>Physical</button>
+    <button>Linux</button>
+  </div>
+</header>
+
+<section class='content'>
+  <div class='interfaces-list'>
+    {% include "_partials/entries_listing.html" %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+[submodule "src/interfaces/demos/Mil-Edit/1"]
+	path = src/interfaces/demos/Mil-Edit/1
+	url = https://github.com/mil/mil-edit.git
+
+[submodule "src/interfaces/demos/Mil-Edit/2"]
+	path = src/interfaces/demos/Mil-Edit/2
+	url = https://github.com/mil/mil-edit-2.git
+
+[submodule "src/interfaces/demos/Asciiw/site"]
+	path = src/interfaces/demos/Asciiw/site
+	url = https://github.com/mil/asciiw.com.git

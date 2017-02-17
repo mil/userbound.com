@@ -1,0 +1,98 @@
+{% extends '_layouts/default.html' %}
+{% block body %}
+  <main class='cv fade-in'>
+  <div class='left col'>
+    <div class='overview'>
+      <div class='inner'>
+        <h1>
+          Miles Alan
+
+          <span class='icons'>
+            {% for icon in icons %}
+            <a href="{{icon.url}}"><svg class="icon-{{ icon.symbol||raw }}"><use xlink:href="/assets/images/icons.svg#icon-{{ icon.symbol||raw }}"></use></svg></a>
+            {% endfor %}
+          </span>
+
+
+        </h1>
+        <h2>{{ tagline }}</h2>
+
+      </div>
+    </div>
+
+
+
+    <h3>Specializations</h3>
+    <ul class='listing'>
+      {% for skill in specializations %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Languages</h3>
+    <ul class='listing'>
+      {% for skill in languages %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Libraries</h3>
+    <ul class='listing'>
+      {% for skill in libraries %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Learning</h3>
+    <ul class='listing'>
+      {% for skill in learning %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+
+
+
+
+    <h3>Certifications</h3>
+    <ul class='listing'>
+      {% for cert in certifications %}
+      <li>{{cert.cert}}<span class='indent'>({{cert.year}})</span></li>
+      {% endfor %}
+    </ul>
+
+
+  </div>
+
+
+
+
+  <div class='right col'>
+
+    <h2>Experience</h2>
+    <section>
+      {% for employer in employment %}
+      <a href="{{ employer.url }}">
+
+        <h3>{{ employer.company }}<span class='date'>{{ employer.time }}</span></h3>
+        <p><span class='job-title'>{{employer.title}}</span>{{ employer.description|raw }}</p>
+      </a>
+      {% endfor %}
+    </section>
+
+    <h2>Education</h2>
+    <section>
+      {% for educator in education %}
+      <a href="{{ educator.url }}">
+
+        <h3>{{ educator.company }}<span class='date'>{{ educator.time }}</span></h3>
+        <p>{{ educator.description|raw }}</p>
+      </a>
+      {% endfor %}
+    </section>
+
+
+  </div>
+
+
+  </main>
+{% endblock %}

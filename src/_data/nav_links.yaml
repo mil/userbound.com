@@ -1,0 +1,18 @@
+---
+nav_links:
+  - symbol: "three-bars"
+    title: blog
+    url: "/blog"
+
+  - symbol: 'crop'
+    title: interfaces
+    url: "/interfaces"
+
+  - symbol: "paintcan"
+    title: works
+    url: "/works"
+
+  - symbol: "person"
+    title: about
+    url: "/about"
+---

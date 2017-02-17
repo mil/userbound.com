@@ -1,0 +1,303 @@
+/* mil-edit Display Page specific 
+ * You don't need this stuff if you drop mil edit somewhere
+ * */
+
+/* mil-edit Editor Area 
+ * For styling the lists, textarea, etc... */
+
+#editor a {
+  text-decoration: none;
+  padding: 0 2px;
+  color: #002ab3;
+  cursor: pointer;
+}
+#editor a:hover { color: white; background-color: #002ab3; }
+
+#editor { 
+  width: 100%;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #cfcfcf;
+  font-size: 13px;
+  font-family: monospace;
+}
+
+#editor div#area {
+  clear: both;
+  overflow: hidden;
+  display: table;
+  width: 100%;
+  background: white;
+}
+
+#editor #list {
+  display: table-cell;
+  vertical-align: top;
+  height: 100%;
+}
+
+#editor a {
+  text-decoration: none;
+  padding: 0 2px;
+  color: #002ab3;
+  cursor: pointer;
+}
+#editor a:hover { color: white; background-color: #002ab3; }
+
+
+#editor #active {
+  color: black;
+  background: #f0f0f0;
+  border-top: 1px solid #ffffff;
+  padding: 5px 10px;
+}
+
+#editor #active textarea {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none !important;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  line-height: 1.6em;
+  resize: none;
+  word-wrap: break-word;
+  white-space:pre;
+}
+
+#editor ::selection, #editor ::-moz-selection, #editor ::-webkit-selection {
+  background: #fffde0;
+}
+
+#editor ul {
+	margin: 0;
+  display: block;
+  padding-left: 10px;
+  font-size: 20px;
+  color: #212121;
+  line-height: 1em;
+	
+}
+#editor ul ul {
+  border: 1px solid #cfcfcf;
+  margin: 5px 0;
+
+}
+#editor li {
+  display: list-item;
+  background-color: white;
+
+  margin-left: 5px;
+	padding: 5px;
+  padding-left: 15px;
+
+  border-left: 1px solid #cfcfcf;
+  border-bottom: 1px dotted #cfcfcf;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+
+#editor ul { background: #ffffff; padding-left: 0;}
+#editor ul ul { background: #f0f0f0; }
+#editor ul ul ul { background: #ffffff; }
+#editor ul ul ul ul { background: #f0f0f0; }
+#editor ul ul ul ul ul { background: #ffffff; }
+#editor ul ul ul ul ul ul { background: #f0f0f0; }
+#editor ul ul ul ul ul ul ul { background: #ffffff; }
+#editor ul ul ul ul ul ul ul ul { background: #f0f0f0; }
+#editor ul ul ul ul ul ul ul ul ul { background: #ffffff; }
+#editor ul ul ul ul ul ul ul ul ul ul { background: #f0f0f0; }
+#editor ul ul ul ul ul ul ul ul ul ul ul { background: #ffffff; }
+
+#editor ul li { font-size: 14px; }
+
+#editor strong, b { font-weight: bold; }
+#editor em, i { font-style: italic;}
+
+/* Raw Markdown Mode */
+#editor textarea#raw {
+  font-size: 13px;
+  min-height: 300px;
+  width: 100%;
+  border: none;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  padding: 10px;
+  background: white;
+  color: black;
+  outline: none;
+  overflow-x: hidden;
+  overflow-y: scroll !important;
+}
+
+
+/* Buttons Bar at the top of the editor */
+div#editor #buttons {
+  height: 35px;
+
+  padding: 0 5px; 
+  padding-right: 0;
+
+  background: white;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  border-bottom: 1px solid #cfcfcf;
+
+  width: auto;
+  clear: both;
+}
+
+
+#editor #buttons a {
+  width: 20px;
+  height: 22px;
+
+  margin: 0 0px;
+  margin-top: 5px;
+
+  background: white;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  border: 1px solid white;
+
+  float: left;
+}
+
+#editor #buttons a:hover {
+  border: 1px solid #cfcfcf;
+  background-color: #e6e6e6;
+}
+
+#editor #buttons .separator {
+  display: block;
+  float: left;
+  height: 15px;
+  border-left: 1px solid #cfcfcf;
+  width: 0px;
+  margin-top: 10px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+
+
+#editor #buttons a#keys { 
+  float: right;
+  display: inline-block;
+  width: auto;
+  height: 35px;
+  line-height: 35px;
+
+  background-image: url('../images/keyboard.png');
+  background-position: 10px center;
+  background-repeat: no-repeat;
+
+  padding: 0;
+  padding-right: 10px;
+
+  font-size: 12px;
+  color: black;
+  padding-left: 35px;
+  background-color: #fcfcfc;
+  margin-top: 0;
+
+  border: none;
+  border-left: 1px solid #cfcfcf;
+}
+
+#editor #buttons a#keys span {
+  color: #4d4d4d;
+  border-left: 1px solid #cfcfcf;
+  padding-left: 8px;
+  line-height: 10px;
+  height: 10px;
+}
+
+
+#editor #buttons a#keys:hover {
+  border: none; border-left: 1px solid #cfcfcf;
+}
+#editor #buttons a#keys:hover span { color: #002ab3; }
+#editor #buttons a#keys.enabled { font-size: 15px; }
+
+#editor #buttons a#undent { margin-left: 0; background-image: url('../images/text_indent_remove.png'); }
+#editor #buttons a#indent { background-image: url('../images/text_indent.png'); }
+#editor #buttons a#link { background-image: url('../images/world_link.png'); }
+#editor #buttons a#italic { background-image: url('../images/text_italic.png'); }
+#editor #buttons a#bold { background-image: url('../images/text_bold.png'); }
+
+
+/* Keybindings Pane */
+#editor #keybindings { 
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  width: 230px;
+  font-size: 11px;
+  background: #fcfcfc;
+  display: none;
+  opacity: 0;
+  margin: 0;
+  vertical-align: top;
+  border-left: 1px solid #cfcfcf;
+  padding: 15px;
+  padding-top: 0;
+  margin-left: 20px;
+  background: white;
+
+  position: relative;
+  font-family: Verdana, sans;
+  height: 360px;
+}
+
+#editor #keybindings .basic {
+  position: relative;
+  height: 100%;
+}
+#editor #keybindings a#collapse {
+  bottom: 20px;
+  left: 0;
+  vertical-align: bottom;
+  float: left;
+  font-family: Verdana;
+  position: absolute;
+}
+
+#editor #keybindings.visible { display: table-cell; }
+
+#editor #keybindings h2 a {
+  font-size: 11px;
+  float: right;
+  line-height: 16px;
+  margin-top: 8px;
+}
+
+#editor #keybindings h2 {
+  display: block;
+  margin: 10px 0;
+  border-bottom: 1px solid #cfcfcf;
+
+  font-size: 15px;
+  line-height: 30px;
+
+  color: #002ab3;
+  font-family: Verdana, sans;
+}
+
+#editor #keybindings span.key {
+  border: 1px solid #cfcfcf;
+  background: white;
+  display: inline-block;
+  padding: 0px 3px;
+  line-height: 18px;
+  margin-top: 3px;
+  font-size: 11px;
+}

@@ -1,0 +1,70 @@
+<footer>
+  <div class='audio-track-seekers'>
+    {% set icon_attrs = {
+        icon: 'arrow-left',
+        title: 'Previous Track',
+        href: false,
+        class_list: 'previous hidden'
+    } %}
+    {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+    {% set icon_attrs = {
+        icon: 'arrow-right',
+        title: 'Next Track',
+        href: false,
+        class_list: 'next hidden'
+      } %}
+    {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+  </div>
+
+
+  {% if next_entry || previous_entry %}
+    <div class='pagination-links'>
+
+
+      {% if next_entry %}
+        {% set icon_attrs = {
+            icon: 'arrow-left',
+            title: next_entry.title,
+            href: next_entry.url,
+            class_list: ''
+        } %}
+        {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+      {% endif %}
+
+      {% set icon_attrs = {
+        icon: 'arrow-up-1',
+        title: 'Go Up',
+        href: '/' + collection_name,
+        class_list: 'up'
+      } %}
+      {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+
+
+      {% if previous_entry %}
+        {% set icon_attrs = {
+            icon: 'arrow-right',
+            title: previous_entry.title,
+            href: previous_entry.url,
+            class_list: ''
+          } %}
+        {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+      {% endif %}
+
+    </div>
+  {% endif %}
+
+  {% set validation_link = 'http://validator.w3.org/check?uri=http://userbound.com/' + path %}
+  {% set icon_attrs = {
+    icon: 'check-1',
+    title: 'Validate Against HTML5 DTD',
+    href: validation_link,
+    class_list: 'validate',
+    target: '_blank'
+  } %}
+  {% include "_partials/svg-icon-link.html" with icon_attrs only %}
+
+
+
+
+
+</footer>
