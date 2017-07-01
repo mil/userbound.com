@@ -14,6 +14,7 @@ window.UserboundInterface = (function() {
   $.highlighter.registerLanguage('openscad', require('./libs/lang/openscad.js'));
   $.highlighter.registerLanguage('js', require('./libs/lang/javascript.js'));
   $.highlighter.registerLanguage('smalltalk', require('./libs/lang/smalltalk.js'));
+  $.highlighter.registerLanguage('go', require('./libs/lang/go.js'));
 
 
   var globals = require('./modules/globals.js');

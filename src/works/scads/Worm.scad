@@ -1,6 +1,3 @@
-/*
-  this'll get you started ;)
-*/
 for (y = [10 : 6 : 20]) {
   for (x = [0 : 2 : 20]) {
     if ( y % 4 != 0) {

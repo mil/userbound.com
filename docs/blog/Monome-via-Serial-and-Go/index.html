@@ -1,9 +1,9 @@
-<!DOCTYPE html><html class="blog_entry"><head><title>Autojump « Userbound</title>
+<!DOCTYPE html><html class="blog_entry"><head><title>Monome via Serial and Go « Userbound</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/assets/all.css?build=1498934521">
+<link rel="stylesheet" href="/assets/all.css?build=1498934522">
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
-<script src="/assets/all.js?build=1498934521"></script>
+<script src="/assets/all.js?build=1498934522"></script>
 </head>
   <body>
     
@@ -101,24 +101,78 @@
           
 <header>
   <h1>
-    Autojump
+    Monome via Serial and Go
     
   </h1>
   
-    <span class="description">October 15, 2012</span>
+    <span class="description">July 1, 2017</span>
   
   
   
 </header>
 
   <section class="content">
-    <p><a href="http://github.com/joelthelion/autojump" target="_blank">Autojump</a> is an ingenious piece of software that maintains a database of the most frequent directories you use from command line. Then you can simply jump to those directories by short hand. For example, I frequently vist the directory <em>/home/mil/code/repos/github/foo-wm</em>. Typing this out with <em>cd</em> every time I launch a new terminal would normally either require: the combination of me hitting the first few letters with a lot of tabs or a backwards search with control-r. However autojump is far simpler:</p>
-<pre data-language="c">j github/foo
+    <p>If you have a <a href="https://en.wikipedia.org/wiki/Monome" target="_blank">Monome</a>, you're probably familiar with <a href="https://github.com/monome/serialosc" target="_blank">serialosc</a> which does what its name implies - converts Monome's serial to OSC.  However, serialosc, isn't the only way to talk to these devices. You can talk serial directly to monomes fairly simply as well.</p>
+<p>Below is a contrived example<sup>1</sup> using Go:</p>
+<pre data-language="golang">package main
+import (
+    "fmt"
+    "io"
+    "log"
+    "time"
+    "github.com/jacobsa/go-serial/serial"
+)
+
+func setLed(port io.ReadWriteCloser, position int, on bool) {
+    var a, b byte
+    if on {
+        a, b = 1, 0x11
+    } else {
+        a, b = 2, 0x10
+    }
+    port.Write([]byte{(a &lt;&lt; 4) + b, byte(position)})
+}
+func main() {
+    port, err := serial.Open(serial.OpenOptions{
+        PortName:        "/dev/ttyUSB0",
+        BaudRate:        115200,
+        DataBits:        8,
+        StopBits:        1,
+        MinimumReadSize: 1,
+    })
+    defer port.Close()
+    if err != nil {
+        log.Fatalf("Monome not found: %v", err)
+    }
+    // Read example, just print information
+    go func() {
+        readBytes := make([]byte, 3)
+        for {
+            port.Read(readBytes)
+            fmt.Printf("%v\n", readBytes)
+        }
+    }()
+    // Write example, cycle all leds off/on
+    s := false
+    for {
+        for x := 0; x &lt; 256; x++ {
+            setLed(port, x, s)
+        }
+        s = !s
+        time.Sleep(100 * time.Millisecond)
+    }
+}
 </pre>
 
-<p>It's that easy and it works damn well. If I ever find myself repetitively hitting tab, I stop and figure out where I'm going and go there with <em>j</em>. Thank you <a href="http://github.com/joelthelion" target="_blank">joelthelion</a> for a piece of true quality software.</p>
+<p>In the above snippet you get both reading and writing directly from/to the Monome's serial port. The <a href="http://monome.org/docs/serial.txt" target="_blank">serial specification</a> is well laid out and working directly with serial rather than using serialosc might be a good option if you don't need all the fancy features (such as Bonjour or multi-device support) of serialosc or just want something a little more low-level.</p>
 
     
+<ol class="footnotes">
+  
+  <li><span name="footnote-1">The example Go code was tested on a non-varibright Monome Walnut 256 model.</span></li>
+  
+</ol>
+
 
   </section>
 
@@ -150,16 +204,6 @@
 
 
       
-        
-        <a class=" svg-icon" href="/blog/A-Simpler-TODO-List" title="A simpler todo list">
-  <span class="symbol">
-    <svg class="icon-arrow-left">
-      <use xlink:href="/assets/images/icons.svg#icon-arrow-left"></use>
-    </svg>
-  </span>
-</a>
-
-      
 
       
       <a class="up svg-icon" href="/blog" title="Go up">
@@ -174,7 +218,7 @@
 
       
         
-        <a class=" svg-icon" href="/blog/My-New-Alarm-Clock" title="My new alarm clock">
+        <a class=" svg-icon" href="/blog/Garden-with-Clojurescript" title="Garden with clojurescript">
   <span class="symbol">
     <svg class="icon-arrow-right">
       <use xlink:href="/assets/images/icons.svg#icon-arrow-right"></use>
@@ -189,7 +233,7 @@
 
   
   
-  <a class="validate svg-icon" target="_blank" href="http://validator.w3.org/check?uri=http://userbound.com/blog/Autojump" title="Validate against html5 dtd">
+  <a class="validate svg-icon" target="_blank" href="http://validator.w3.org/check?uri=http://userbound.com/blog/Monome-via-Serial-and-Go" title="Validate against html5 dtd">
   <span class="symbol">
     <svg class="icon-check-1">
       <use xlink:href="/assets/images/icons.svg#icon-check-1"></use>
