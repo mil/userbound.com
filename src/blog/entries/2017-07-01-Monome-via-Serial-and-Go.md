@@ -43,7 +43,7 @@ func main() {
 	}
 	// Read example, just print information
 	go func() {
-		readBytes := make([]byte, 2)
+		readBytes := make([]byte, 3)
 		for {
 			port.Read(readBytes)
 			fmt.Printf("%v\n", readBytes)
