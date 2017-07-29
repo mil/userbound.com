@@ -15,6 +15,7 @@ window.UserboundInterface = (function() {
   $.highlighter.registerLanguage('js', require('./libs/lang/javascript.js'));
   $.highlighter.registerLanguage('smalltalk', require('./libs/lang/smalltalk.js'));
   $.highlighter.registerLanguage('go', require('./libs/lang/go.js'));
+  $.highlighter.registerLanguage('bash', require('./libs/lang/bash.js'));
 
 
   var globals = require('./modules/globals.js');

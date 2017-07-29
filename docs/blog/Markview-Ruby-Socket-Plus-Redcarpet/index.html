@@ -1,9 +1,9 @@
 <!DOCTYPE html><html class="blog_entry"><head><title>Ruby Socket + Redcarpet = Browser-Based Markdown Preview « Userbound</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/assets/all.css?build=1500754811">
+<link rel="stylesheet" href="/assets/all.css?build=1501358240">
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
-<script src="/assets/all.js?build=1500754811"></script>
+<script src="/assets/all.js?build=1501358240"></script>
 </head>
   <body>
     
@@ -116,7 +116,6 @@
 In anycase, I had been using my <a href="/projects/markdown-tree">Markdown Tree</a> project in order to faciliate a sort of "live-preview" of the documents I send to mkd2pdf. Nothing against <a href="http://sinatrarb.com" target="_blank">Sinatra</a> but I wanted a lighter solution.  Using Markdown-Tree (and Sinatra) purely for its Markdown rendering capability didn't make sense to me. Really I was just working with Redcarpet and Socket. Sinatra wasn't doing a damn thing for me. </p>
 <p>Thus, I felt Sinatra had no place in the task at hand.  What I wanted was a simple commandline tool I could use like <em>markview.rb somefile.md</em> and it would give me a live URL on localhost of the markdown file rendered as HTML.</p>
 <p>Luckily Ruby provides an excellent <a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/socket/rdoc/Socket.html" target="_blank">Socket Class</a>. Combine that with a markdown renderer such as <a href="http://github.com/tanoku/redcarpet" target="_blank">Redcarpet</a> and you have a simplistic web-based markdown viewing utility. Basically this is just a bit of ruby that interpolates Redcarpet's rendered results with some HTML. Then, along with a HTTP Header, the HTML is served on port 2000. A CSS file for styling is stored in <em>~/.config/markview</em>.</p>
-<p><a href="https://github.com/mil/configs-and-bins/blob/master/bins/markview.rb" target="_blank">markview.rb</a> <em>(/home/mil/bin/markview.rb)</em></p>
 <pre data-language="ruby">#!/usr/bin/ruby
 require "socket"
 require "redcarpet"

@@ -11,8 +11,6 @@ Thus, I felt Sinatra had no place in the task at hand.  What I wanted was a simp
 
 Luckily Ruby provides an excellent [Socket Class](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/socket/rdoc/Socket.html). Combine that with a markdown renderer such as [Redcarpet](http://github.com/tanoku/redcarpet) and you have a simplistic web-based markdown viewing utility. Basically this is just a bit of ruby that interpolates Redcarpet's rendered results with some HTML. Then, along with a HTTP Header, the HTML is served on port 2000. A CSS file for styling is stored in *~/.config/markview*.
 
-[markview.rb](https://github.com/mil/configs-and-bins/blob/master/bins/markview.rb) *(/home/mil/bin/markview.rb)*
-
 <pre data-language="ruby">
 #!/usr/bin/ruby
 require "socket"

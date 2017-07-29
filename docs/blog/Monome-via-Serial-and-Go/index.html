@@ -1,9 +1,9 @@
 <!DOCTYPE html><html class="blog_entry"><head><title>Monome via Serial and Go « Userbound</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/assets/all.css?build=1500754814">
+<link rel="stylesheet" href="/assets/all.css?build=1501358242">
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
-<script src="/assets/all.js?build=1500754814"></script>
+<script src="/assets/all.js?build=1501358242"></script>
 </head>
   <body>
     
@@ -146,7 +146,7 @@ func main() {
     }
     // Read example, just print information
     go func() {
-        readBytes := make([]byte, 3)
+        readBytes := make([]byte, 2)
         for {
             port.Read(readBytes)
             fmt.Printf("%v\n", readBytes)
@@ -202,6 +202,16 @@ func main() {
   
     <div class="pagination-links">
 
+
+      
+        
+        <a class=" svg-icon" href="/blog/Trackman-Marble-with-xset" title="Trackman marble with xset">
+  <span class="symbol">
+    <svg class="icon-arrow-left">
+      <use xlink:href="/assets/images/icons.svg#icon-arrow-left"></use>
+    </svg>
+  </span>
+</a>
 
       
 

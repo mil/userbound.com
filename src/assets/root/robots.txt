@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /cv
+Disallow: /clients
+Disallow: /consulting
+Disallow: /noncommercial

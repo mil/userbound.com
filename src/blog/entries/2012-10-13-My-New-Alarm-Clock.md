@@ -10,7 +10,7 @@ Sometimes I can't get myself out of bed and to a conscious state before a certai
 
 Before I go to sleep, I kill my display with goodnight:
 
-<pre data-language="c">
+<pre data-language="bash">
 alias goodnight='xset dpms force off'
 </pre>
 
