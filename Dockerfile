@@ -17,4 +17,4 @@ RUN npm install -g gulp
 RUN npm install
 
 EXPOSE 4000
-ENTRYPOINT [ "gulp" ]
+#ENTRYPOINT [ "gulp" ]
